@@ -18,12 +18,16 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+        'topic': '现在CSTAR框架的应用场景分析',
+        'current_year': str(datetime.now().year),
+        'document': 'CSTAR-Model.docx'
     }
 
     try:
-        Datacrew().crew().kickoff(inputs=inputs)
+        # Datacrew().crew().kickoff(inputs=inputs)
+        from crewai_files import File
+        file = File(source="CSTAR-Model.docx")
+        Datacrew().crew().kickoff(inputs=inputs, input_files={'document': file})
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
